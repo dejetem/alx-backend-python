@@ -2,10 +2,9 @@
 """
 Measure the runtime
 """
-
 import asyncio
 import random
-from time import perf_counter
+import time
 
 
 wait_n = __import__('1-concurrent_coroutines').wait_n
@@ -17,7 +16,7 @@ def measure_time(n: int, max_delay: int) -> float:
         n (int): times
         max_delay (int): dalay max number
     """
-    counter = perf_counter()
+    start = time.perf_counter()
     asyncio.run(wait_n(n, max_delay))
-    result = perf_counter() - counter
-    return
+    elapsed = time.perf_counter() - start
+    return elapsed / n
